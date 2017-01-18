@@ -1,0 +1,19 @@
+<head>
+    <title>myAPP</title>
+</head>
+
+<body>
+    <h1>myAPP + Amazon Alexa Integration</h1> {{> main}}
+</body>
+
+<template name="main">
+  <p>Click this button to run a method. Now, ask Alexa to do run the method for you!<br>
+    You can do it by saying: <strong>alexa, ask myApp to run a method.</strong></p>
+  <button>Run Method</button>
+  <h2>List of Executed Methods</h2>
+  <ul>
+    {{#each randomData}}
+    <li>{{name}} - {{formatDate createdAt}}</li>
+    {{/each}}
+  </ul>
+</template>
