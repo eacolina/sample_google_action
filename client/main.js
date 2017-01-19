@@ -1,13 +1,53 @@
 import {
     RandomData
-} from '../imports/api/random_data.js';
+} from '../imports/api/random-data.js';
+
 import {
-    Mongo
-} from 'meteor/mongo';
+    NavData
+} from '../imports/api/nav-data.js';
+
+import '../imports/router/routes.js';
 
 var moment = require('moment');
 
-Template.main.onCreated(function mainOnCreated() {});
+Template.main.onCreated(function mainOnCreated() {
+    this.autorun(function() {
+        if (NavData.find({
+                name: 'Detail 1'
+            }).count() > 0) {
+            Router.go('/detail1');
+            Meteor.call('removeNavDocs');
+        }
+        if (NavData.find({
+                name: 'Detail 2'
+            }).count() > 0) {
+            Router.go('/detail2');
+            Meteor.call('removeNavDocs');
+        }
+    });
+});
+
+Template.detail1.onCreated(function mainOnCreated() {
+    this.autorun(function() {
+        if (NavData.find({
+                name: 'Detail 2'
+            }).count() > 0) {
+            Router.go('/detail2');
+            Meteor.call('removeNavDocs');
+        }
+    });
+});
+
+Template.detail2.onCreated(function mainOnCreated() {
+    this.autorun(function() {
+        if (NavData.find({
+                name: 'Detail 1'
+            }).count() > 0) {
+            Router.go('/detail1');
+            Meteor.call('removeNavDocs');
+        }
+    });
+});
 
 Template.main.helpers({
     counter() {

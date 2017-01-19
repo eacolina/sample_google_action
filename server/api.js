@@ -4,7 +4,11 @@ import {
 
 import {
     RandomData
-} from '../imports/api/random_data.js';
+} from '../imports/api/random-data.js';
+
+import {
+    NavData
+} from '../imports/api/nav-data.js';
 
 // Global API configuration
 var Api = new Restivus({
@@ -23,6 +27,41 @@ Api.addRoute('random.insert/:id', {
             name: 'Method ' + this.urlParams.id,
             createdAt: new Date()
         });
-        return "OK";
+        var data = {};
+        data["0"] = "OK";
+        data["1"] = this.urlParams.id;
+        return JSON.stringify(data);
+    },
+});
+
+// Exposing a POST API
+// Maps to: /api/random.insert/:id
+Api.addRoute('detail.view1', {
+    authRequired: false
+}, {
+    post: function() {
+        NavData.insert({
+            name: 'Detail 1',
+            createdAt: new Date()
+        });
+        var data = {};
+        data["0"] = "OK";
+        return JSON.stringify(data);
+    },
+});
+
+// Exposing a POST API
+// Maps to: /api/random.insert/:id
+Api.addRoute('detail.view2', {
+    authRequired: false
+}, {
+    post: function() {
+        NavData.insert({
+            name: 'Detail 2',
+            createdAt: new Date()
+        });
+        var data = {};
+        data["0"] = "OK";
+        return JSON.stringify(data);
     },
 });
