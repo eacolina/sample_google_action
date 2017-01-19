@@ -35,7 +35,24 @@ Api.addRoute('random.insert/:id', {
 });
 
 // Exposing a POST API
-// Maps to: /api/random.insert/:id
+// Maps to: /api/home.view/
+Api.addRoute('home.view', {
+    authRequired: false
+}, {
+    post: function() {
+        NavData.insert({
+            name: 'Home',
+            createdAt: new Date()
+        });
+        var data = {};
+        data["0"] = "OK";
+        return JSON.stringify(data);
+    },
+});
+
+
+// Exposing a POST API
+// Maps to: /api/detail.view1/
 Api.addRoute('detail.view1', {
     authRequired: false
 }, {
@@ -51,7 +68,7 @@ Api.addRoute('detail.view1', {
 });
 
 // Exposing a POST API
-// Maps to: /api/random.insert/:id
+// Maps to: /api/detail.view2/
 Api.addRoute('detail.view2', {
     authRequired: false
 }, {
