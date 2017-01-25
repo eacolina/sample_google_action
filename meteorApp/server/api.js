@@ -28,9 +28,24 @@ Api.addRoute('random.insert/:id', {
             createdAt: new Date()
         });
         var data = {};
-        data["0"] = "OK";
-        data["1"] = this.urlParams.id;
-        return JSON.stringify(data);
+        data["status"] = "OK";
+        data["name"] = this.urlParams.id;
+        return data;
+    },
+});
+
+// Exposing a GET API
+// Maps to: /api/random.get/
+Api.addRoute('random.get/', {
+    authRequired: false
+}, {
+    get: function() {
+        var data = RandomData.findOne({}, {
+            sort: {
+                createdAt: -1
+            }
+        });
+        return data;
     },
 });
 
@@ -45,8 +60,8 @@ Api.addRoute('home.view', {
             createdAt: new Date()
         });
         var data = {};
-        data["0"] = "OK";
-        return JSON.stringify(data);
+        data["status"] = "OK";
+        return data;
     },
 });
 
@@ -62,8 +77,8 @@ Api.addRoute('detail.view1', {
             createdAt: new Date()
         });
         var data = {};
-        data["0"] = "OK";
-        return JSON.stringify(data);
+        data["status"] = "OK";
+        return data;
     },
 });
 
@@ -78,7 +93,7 @@ Api.addRoute('detail.view2', {
             createdAt: new Date()
         });
         var data = {};
-        data["0"] = "OK";
-        return JSON.stringify(data);
+        data["status"] = "OK";
+        return data;
     },
 });
